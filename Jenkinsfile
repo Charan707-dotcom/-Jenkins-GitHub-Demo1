@@ -36,13 +36,17 @@ pipeline {
 
         stage('Docker Build') {
             steps {
-                bat 'docker build -t banking-system:lab5 .'
+                bat '"C:\\Users\\Reliance Digital\\AppData\\Local\\Programs\\DockerDesktop\\resources\\bin\\docker.exe" build -t banking-system:lab5 .'
             }
         }
 
         stage('Docker Deployment') {
             steps {
-                bat 'docker rm -f banking-system-lab5 2>NUL & docker run -d --name banking-system-lab5 -p 8081:8080 -e "SPRING_DATASOURCE_URL=jdbc:mysql://host.docker.internal:3306/bankingsystem?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Kolkata" banking-system:lab5'
+                bat '''
+    "C:\\Users\\Reliance Digital\\AppData\\Local\\Programs\\DockerDesktop\\resources\\bin\\docker.exe" rm -f banking-system-lab5
+    if errorlevel 1 exit /b 1
+    "C:\\Users\\Reliance Digital\\AppData\\Local\\Programs\\DockerDesktop\\resources\\bin\\docker.exe" run -d --name banking-system-lab5 -p 8081:8080 -e "SPRING_DATASOURCE_URL=jdbc:mysql://host.docker.internal:3306/bankingsystem?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Kolkata" banking-system:lab5
+'''
             }
         }
     }
