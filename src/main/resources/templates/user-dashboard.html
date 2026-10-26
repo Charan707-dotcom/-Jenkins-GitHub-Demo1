@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+
+    <title>Dashboard</title>
+
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="top">
+
+        <b>SimpleBank</b>
+
+        <span>
+
+            <a href="/transactions">
+                Transactions
+            </a>
+
+            <a href="/loans/apply">
+                Apply Loan
+            </a>
+
+            <a href="/user/transfer">
+                Transfer Money
+            </a>
+
+            <a href="/logout">
+                Logout
+            </a>
+
+        </span>
+
+    </nav>
+
+    <!-- Main Content -->
+    <main class="page">
+
+        <h1>
+            Welcome,
+            <span th:text="${user.name}">
+                User
+            </span>
+        </h1>
+
+        <!-- Success Message -->
+        <div
+            class="success"
+            th:if="${param.transferSuccess}">
+
+            Money transferred successfully.
+
+        </div>
+
+        <!-- Error Message -->
+        <div
+            class="error"
+            th:if="${error}"
+            th:text="${error}">
+        </div>
+
+        <!-- Account + Profile -->
+        <div class="grid">
+
+            <!-- Existing Account -->
+            <section
+                class="card"
+                th:if="${account != null}">
+
+                <h2>My Account</h2>
+
+                <p>
+                    Account Number
+                </p>
+
+                <strong
+                    th:text="${account.accountNumber}">
+                    Account Number
+                </strong>
+
+                <p>
+                    Type:
+                    <span
+                        th:text="${account.accountType}">
+                        Savings
+                    </span>
+                </p>
+
+                <div class="balance">
+
+                    ₹
+                    <span
+                        th:text="${account.balance}">
+                        0.00
+                    </span>
+
+                </div>
+
+                <!-- Deposit and Withdraw -->
+                <div class="forms">
+
+                    <!-- Deposit -->
+                    <form
+                        method="post"
+                        action="/account/deposit">
+
+                        <label>
+                            Deposit
+                        </label>
+
+                        <input
+                            name="amount"
+                            type="number"
+                            min="0.01"
+                            step="0.01"
+                            placeholder="Deposit amount"
+                            required>
+
+                        <button type="submit">
+                            Deposit
+                        </button>
+
+                    </form>
+
+                    <!-- Withdraw -->
+                    <form
+                        method="post"
+                        action="/account/withdraw">
+
+                        <label>
+                            Withdraw
+                        </label>
+
+                        <input
+                            name="amount"
+                            type="number"
+                            min="0.01"
+                            step="0.01"
+                            placeholder="Withdraw amount"
+                            required>
+
+                        <button type="submit">
+                            Withdraw
+                        </button>
+
+                    </form>
+
+                </div>
+
+            </section>
+
+            <!-- No Account -->
+            <section
+                class="card"
+                th:if="${account == null}">
+
+                <h2>
+                    No Bank Account
+                </h2>
+
+                <p>
+                    You need to be 18 or older
+                    to create a bank account.
+                </p>
+
+                <a
+                    class="btn"
+                    href="/account/create">
+
+                    Create Bank Account
+
+                </a>
+
+            </section>
+
+            <!-- User Profile -->
+            <section class="card">
+
+                <h2>
+                    Profile
+                </h2>
+
+                <p>
+                    <b>Name:</b>
+                    <span th:text="${user.name}">
+                        Name
+                    </span>
+                </p>
+
+                <p>
+                    <b>Age:</b>
+                    <span th:text="${user.age}">
+                        Age
+                    </span>
+                </p>
+
+                <p>
+                    <b>Phone:</b>
+                    <span th:text="${user.phone}">
+                        Phone
+                    </span>
+                </p>
+
+                <p>
+                    <b>Username:</b>
+                    <span th:text="${user.username}">
+                        Username
+                    </span>
+                </p>
+
+            </section>
+
+        </div>
+
+
+        <!-- ================================= -->
+        <!-- ACCOUNT TO ACCOUNT TRANSFER -->
+        <!-- ================================= -->
+
+        <section
+            class="card"
+            th:if="${account != null}">
+
+            <h2>
+                Account to Account Transfer
+            </h2>
+
+            <p>
+                Send money directly to another
+                SimpleBank account.
+            </p>
+
+            <form
+                method="post"
+                action="/user/transfer">
+
+                <label for="receiverAccountNumber">
+                    Receiver Account Number
+                </label>
+
+                <input
+                    id="receiverAccountNumber"
+                    name="receiverAccountNumber"
+                    type="text"
+                    placeholder="Enter receiver account number"
+                    required>
+
+                <label for="transferAmount">
+                    Transfer Amount
+                </label>
+
+                <input
+                    id="transferAmount"
+                    name="amount"
+                    type="number"
+                    min="0.01"
+                    step="0.01"
+                    placeholder="Enter amount"
+                    required>
+
+                <button type="submit">
+                    Transfer Money
+                </button>
+
+            </form>
+
+        </section>
+
+
+        <!-- Loans -->
+        <h2>
+            My Loans
+        </h2>
+
+        <div
+            class="card"
+            th:each="loan : ${loans}">
+
+            <!-- Loan Header -->
+            <div class="loan-head">
+
+                <b
+                    th:text="${loan.loanNumber}">
+                    Loan Number
+                </b>
+
+                <span
+                    class="badge"
+                    th:text="${loan.status}">
+                    PENDING
+                </span>
+
+            </div>
+
+            <!-- Loan Type -->
+            <p
+                th:text="${loan.loanType}
+                    + ' | Rate: '
+                    + ${loan.annualRate}
+                    + '%'">
+
+                Loan Type
+
+            </p>
+
+            <!-- Loan Details -->
+            <p>
+
+                Principal:
+                ₹<span
+                    th:text="${loan.principal}">
+                    0.00
+                </span>
+
+                |
+
+                Interest:
+                ₹<span
+                    th:text="${loan.interest()}">
+                    0.00
+                </span>
+
+                |
+
+                Due:
+                ₹<span
+                    th:text="${loan.totalDue()}">
+                    0.00
+                </span>
+
+            </p>
+
+            <!-- Loan Payment -->
+            <form
+                th:if="${loan.status == 'APPROVED'
+                    && loan.totalDue().doubleValue() > 0}"
+                method="post"
+                action="/loans/pay"
+                class="inline">
+
+                <input
+                    type="hidden"
+                    name="loanId"
+                    th:value="${loan.id}">
+
+                <input
+                    name="amount"
+                    type="number"
+                    min="0.01"
+                    step="0.01"
+                    placeholder="Payment"
+                    required>
+
+                <button type="submit">
+                    Pay Loan
+                </button>
+
+            </form>
+
+        </div>
+
+
+        <!-- No Loans -->
+        <div
+            class="card"
+            th:if="${#lists.isEmpty(loans)}">
+
+            <p>
+                You don't have any loans yet.
+            </p>
+
+            <a
+                class="btn"
+                href="/loans/apply">
+
+                Apply for a Loan
+
+            </a>
+
+        </div>
+
+    </main>
+
+</body>
+
+</html>

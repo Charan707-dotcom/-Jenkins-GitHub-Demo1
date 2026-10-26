@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+
+    <title>Transactions</title>
+
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="top">
+
+        <b>SimpleBank</b>
+
+        <div>
+            <a href="/user/dashboard">
+                Dashboard
+            </a>
+
+            <a href="/logout">
+                Logout
+            </a>
+        </div>
+
+    </nav>
+
+    <!-- Main Content -->
+    <main class="page">
+
+        <div class="card">
+
+            <h1>Transaction History</h1>
+
+            <table>
+
+                <thead>
+
+                    <tr>
+                        <th>Type</th>
+                        <th>Amount</th>
+                        <th>Balance After</th>
+                        <th>Date</th>
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    <tr th:each="transaction : ${transactions}">
+
+                        <td th:text="${transaction.type}">
+                            Transaction Type
+                        </td>
+
+                        <td>
+                            ₹<span
+                                th:text="${transaction.amount}">
+                                0.00
+                            </span>
+                        </td>
+
+                        <td>
+                            ₹<span
+                                th:text="${transaction.balanceAfter}">
+                                0.00
+                            </span>
+                        </td>
+
+                        <td
+                            th:text="${transaction.transactionTime}">
+                            Date
+                        </td>
+
+                    </tr>
+
+                    <!-- No transactions -->
+                    <tr
+                        th:if="${#lists.isEmpty(transactions)}">
+
+                        <td
+                            colspan="4"
+                            style="text-align: center;">
+
+                            No transactions found.
+
+                        </td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </main>
+
+</body>
+
+</html>

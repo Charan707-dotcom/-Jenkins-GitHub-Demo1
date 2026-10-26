@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Register</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+
+<div class="auth">
+
+    <div class="card">
+
+        <h1>Create User</h1>
+
+        <p>Register for SimpleBank</p>
+
+        <!-- Error Message -->
+        <div class="error"
+             th:if="${error}"
+             th:text="${error}">
+        </div>
+
+        <form method="post"
+              action="/register"
+              onsubmit="return validateForm()">
+
+            <!-- Full Name -->
+            <label>Full Name</label>
+
+            <input
+                name="name"
+                type="text"
+                placeholder="Enter full name"
+                pattern="[A-Za-z ]+"
+                title="Name can contain alphabets and spaces only"
+                required>
+
+
+            <!-- Age -->
+            <label>Age</label>
+
+            <input
+                name="age"
+                type="number"
+                min="1"
+                max="100"
+                step="1"
+                placeholder="Enter age"
+                required>
+
+
+            <!-- Phone -->
+            <label>Phone</label>
+
+            <input
+                name="phone"
+                type="tel"
+                inputmode="numeric"
+                pattern="[0-9]{10}"
+                maxlength="10"
+                placeholder="Enter 10 digit phone number"
+                title="Phone number must contain exactly 10 digits"
+                required>
+
+
+            <!-- Address -->
+            <label>Address</label>
+
+            <input
+                name="address"
+                type="text"
+                placeholder="Enter address"
+                required>
+
+
+            <!-- Username -->
+            <label>Username</label>
+
+            <input
+                name="username"
+                type="text"
+                placeholder="Enter username"
+                required>
+
+
+            <!-- Password -->
+            <label>Password</label>
+
+            <input
+                name="password"
+                type="password"
+                placeholder="Enter password"
+                required>
+
+
+            <button type="submit">
+                Register
+            </button>
+
+        </form>
+
+        <a href="/login">
+            Already have an account? Login
+        </a>
+
+        <a href="/">
+            Back to Home
+        </a>
+
+    </div>
+
+</div>
+
+
+<script>
+
+function validateForm() {
+
+    const name = document.querySelector('input[name="name"]').value.trim();
+    const age = document.querySelector('input[name="age"]').value;
+    const phone = document.querySelector('input[name="phone"]').value;
+
+    // Name validation
+    if (!/^[A-Za-z ]+$/.test(name)) {
+        alert("Full name can contain alphabets and spaces only.");
+        return false;
+    }
+
+    // Age validation
+    const ageNumber = Number(age);
+
+    if (!Number.isInteger(ageNumber) || ageNumber < 1 || ageNumber > 100) {
+        alert("Age must be a whole number between 1 and 100.");
+        return false;
+    }
+
+    // Phone validation
+    if (!/^[0-9]{10}$/.test(phone)) {
+        alert("Phone number must contain exactly 10 digits.");
+        return false;
+    }
+
+    return true;
+}
+
+</script>
+
+</body>
+
+</html>

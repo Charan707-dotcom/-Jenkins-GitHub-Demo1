@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+
+    <title>Bank Login</title>
+
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+
+    <div class="auth">
+
+        <div class="card">
+
+            <h1>Bank / Admin Login</h1>
+
+            <p>
+                
+            </p>
+
+            <!-- Error Message -->
+            <div
+                class="error"
+                th:if="${error}"
+                th:text="${error}">
+            </div>
+
+            <!-- Login Form -->
+            <form
+                method="post"
+                action="/bank/login">
+
+                <label for="username">
+                    Username
+                </label>
+
+                <input
+                    id="username"
+                    name="username"
+                    type="text"
+                    placeholder="Username"
+                    required>
+
+                <label for="password">
+                    Password
+                </label>
+
+                <input
+                    id="password"
+                    name="password"
+                    type="password"
+                    placeholder="Password"
+                    required>
+
+                <button type="submit">
+                    Login
+                </button>
+
+            </form>
+
+            <br>
+
+            <a href="/">
+                Back to Home
+            </a>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>

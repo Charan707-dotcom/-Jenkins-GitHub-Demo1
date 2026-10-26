@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Create Account</title>
+
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+
+    <div class="page">
+
+        <div class="card">
+
+            <h1>Create Bank Account</h1>
+
+            <p>
+                Only customers aged 18 or above can create
+                a bank account.
+            </p>
+
+            <!-- Error Message -->
+            <div
+                class="error"
+                th:if="${error}"
+                th:text="${error}">
+            </div>
+
+            <!-- Account Creation Form -->
+            <form
+                method="post"
+                action="/account/create">
+
+                <label for="accountType">
+                    Account Type
+                </label>
+
+                <select
+                    id="accountType"
+                    name="accountType"
+                    required>
+
+                    <option value="Savings">
+                        Savings
+                    </option>
+
+                    <option value="Current">
+                        Current
+                    </option>
+
+                </select>
+
+                <label for="initialDeposit">
+                    Initial Deposit
+                </label>
+
+                <input
+                    id="initialDeposit"
+                    name="initialDeposit"
+                    type="number"
+                    min="0"
+                    step="0.01"
+                    placeholder="Enter initial deposit"
+                    required>
+
+                <button type="submit">
+                    Create Account
+                </button>
+
+            </form>
+
+            <br>
+
+            <a href="/user/dashboard">
+                Back to Dashboard
+            </a>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>

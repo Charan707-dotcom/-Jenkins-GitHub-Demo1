@@ -1,0 +1,280 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f4f7fb;
+    color: #172033;
+}
+
+a {
+    color: #3159c7;
+    text-decoration: none;
+    margin-left: 18px;
+}
+
+/* =========================
+   TOP NAVIGATION
+   ========================= */
+
+.top {
+    height: 64px;
+    background: #ffffff;
+    padding: 20px 6%;
+    display: flex;
+    justify-content: space-between;
+    box-shadow: 0 1px 8px #ddd;
+}
+
+/* =========================
+   HERO SECTION
+   ========================= */
+
+.hero {
+    min-height: 100vh;
+    background: linear-gradient(
+        135deg,
+        #172554,
+        #3159c7
+    );
+    color: #ffffff;
+}
+
+.hero nav {
+    padding: 25px 7%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.hero nav a {
+    color: #ffffff;
+}
+
+.hero-content {
+    max-width: 800px;
+    margin: 150px auto;
+    text-align: center;
+}
+
+.hero h1 {
+    font-size: 52px;
+    margin: 15px;
+}
+
+.hero p {
+    font-size: 20px;
+    opacity: 0.9;
+}
+
+/* =========================
+   BUTTONS
+   ========================= */
+
+.btn,
+button {
+    display: inline-block;
+    border: 0;
+    border-radius: 8px;
+    background: #3159c7;
+    color: #ffffff;
+    padding: 12px 20px;
+    cursor: pointer;
+    font-weight: bold;
+    margin: 8px;
+}
+
+.hero .btn {
+    background: #ffffff;
+    color: #172554;
+}
+
+.hero .outline {
+    background: transparent;
+    border: 1px solid #ffffff;
+    color: #ffffff;
+}
+
+/* =========================
+   AUTHENTICATION
+   ========================= */
+
+.auth {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* =========================
+   PAGE
+   ========================= */
+
+.page {
+    max-width: 1100px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+/* =========================
+   CARDS
+   ========================= */
+
+.card {
+    background: #ffffff;
+    border-radius: 14px;
+    padding: 25px;
+    margin: 18px 0;
+    box-shadow: 0 5px 20px #dce2ec;
+}
+
+.auth .card {
+    width: 420px;
+}
+
+/* =========================
+   INPUTS
+   ========================= */
+
+input,
+select {
+    width: 100%;
+    padding: 12px;
+    margin: 8px 0 14px;
+    border: 1px solid #ccd4e0;
+    border-radius: 8px;
+}
+
+label {
+    font-weight: bold;
+}
+
+/* =========================
+   GRID
+   ========================= */
+
+.grid,
+.stats {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.stats {
+    grid-template-columns: repeat(2, 200px);
+}
+
+.stats strong {
+    font-size: 35px;
+    display: block;
+    margin-top: 10px;
+}
+
+/* =========================
+   BALANCE
+   ========================= */
+
+.balance {
+    font-size: 34px;
+    font-weight: bold;
+    margin: 18px 0;
+}
+
+/* =========================
+   FORMS
+   ========================= */
+
+.forms {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+/* =========================
+   MESSAGES
+   ========================= */
+
+.error {
+    background: #fee2e2;
+    color: #991b1b;
+    padding: 12px;
+    border-radius: 8px;
+    margin: 10px 0;
+}
+
+.success {
+    background: #dcfce7;
+    color: #166534;
+    padding: 12px;
+    border-radius: 8px;
+    margin: 10px 0;
+}
+
+/* =========================
+   LOAN
+   ========================= */
+
+.loan-head {
+    display: flex;
+    justify-content: space-between;
+}
+
+.badge {
+    padding: 5px 10px;
+    border-radius: 20px;
+    background: #e7edf9;
+}
+
+/* =========================
+   INLINE ELEMENT
+   ========================= */
+
+.inline {
+    display: inline;
+}
+
+/* =========================
+   TABLE
+   ========================= */
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th,
+td {
+    text-align: left;
+    padding: 12px;
+    border-bottom: 1px solid #e3e7ee;
+}
+
+/* =========================
+   DANGER BUTTON
+   ========================= */
+
+.danger {
+    background: #b42318;
+}
+
+/* =========================
+   MOBILE
+   ========================= */
+
+@media (max-width: 700px) {
+
+    .grid,
+    .forms,
+    .stats {
+        grid-template-columns: 1fr;
+    }
+
+    .hero h1 {
+        font-size: 38px;
+    }
+
+    .hero-content {
+        margin: 100px 20px;
+    }
+}

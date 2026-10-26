@@ -1,0 +1,11 @@
+com\banking\bankingsystem\bank\BankAccountRepository.class
+com\banking\bankingsystem\BankingSystemApplication.class
+com\banking\bankingsystem\loan\Loan.class
+com\banking\bankingsystem\loan\LoanRepository.class
+com\banking\bankingsystem\user\UserRepository.class
+com\banking\bankingsystem\transaction\Transaction.class
+com\banking\bankingsystem\transaction\TransactionRepository.class
+com\banking\bankingsystem\service\BankingService.class
+com\banking\bankingsystem\web\WebController.class
+com\banking\bankingsystem\bank\BankAccount.class
+com\banking\bankingsystem\user\User.class

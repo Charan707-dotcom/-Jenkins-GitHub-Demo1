@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+
+    <title>Bank Dashboard</title>
+
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="top">
+
+        <b>SimpleBank Admin</b>
+
+        <a href="/logout">
+            Logout
+        </a>
+
+    </nav>
+
+    <!-- Main Content -->
+    <main class="page">
+
+        <h1>Bank Dashboard</h1>
+
+        <!-- Bank Statistics -->
+        <div class="stats">
+
+            <div class="card">
+
+                <b>Users</b>
+
+                <strong th:text="${userCount}">
+                    0
+                </strong>
+
+            </div>
+
+            <div class="card">
+
+                <b>Accounts</b>
+
+                <strong th:text="${accountCount}">
+                    0
+                </strong>
+
+            </div>
+
+        </div>
+
+        <!-- Loan Applications -->
+        <div class="card">
+
+            <h2>Loan Applications</h2>
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>Loan</th>
+
+                        <th>User</th>
+
+                        <th>Type</th>
+
+                        <th>Amount</th>
+
+                        <th>Date</th>
+
+                        <th>Status</th>
+
+                        <th>Action</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    <tr th:each="loan : ${loans}">
+
+                        <td
+                            th:text="${loan.loanNumber}">
+                            Loan Number
+                        </td>
+
+                        <td
+                            th:text="${loan.user.name}">
+                            User
+                        </td>
+
+                        <td
+                            th:text="${loan.loanType}">
+                            Loan Type
+                        </td>
+
+                        <td>
+                            ₹<span
+                                th:text="${loan.principal}">
+                                0
+                            </span>
+                        </td>
+
+                        <td
+                            th:text="${loan.startDate}">
+                            Date
+                        </td>
+
+                        <td
+                            th:text="${loan.status}">
+                            PENDING
+                        </td>
+
+                        <!-- Actions only for pending loans -->
+                        <td
+                            th:if="${loan.status == 'PENDING'}">
+
+                            <!-- Sanction -->
+                            <form
+                                method="post"
+                                action="/bank/loan/sanction"
+                                class="inline">
+
+                                <input
+                                    type="hidden"
+                                    name="id"
+                                    th:value="${loan.id}">
+
+                                <button type="submit">
+                                    Sanction
+                                </button>
+
+                            </form>
+
+                            <!-- Reject -->
+                            <form
+                                method="post"
+                                action="/bank/loan/reject"
+                                class="inline">
+
+                                <input
+                                    type="hidden"
+                                    name="id"
+                                    th:value="${loan.id}">
+
+                                <button
+                                    type="submit"
+                                    class="danger">
+
+                                    Reject
+
+                                </button>
+
+                            </form>
+
+                        </td>
+
+                        <!-- Empty action for approved/rejected loans -->
+                        <td
+                            th:unless="${loan.status == 'PENDING'}">
+
+                            -
+
+                        </td>
+
+                    </tr>
+
+                    <!-- No loans message -->
+                    <tr th:if="${#lists.isEmpty(loans)}">
+
+                        <td
+                            colspan="7"
+                            style="text-align: center;">
+
+                            No loan applications found.
+
+                        </td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </main>
+
+</body>
+
+</html>

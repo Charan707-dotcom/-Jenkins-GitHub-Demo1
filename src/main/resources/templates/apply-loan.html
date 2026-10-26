@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Apply Loan</title>
+
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+
+    <div class="page">
+
+        <div class="card">
+
+            <h1>Apply for Loan</h1>
+
+            <!-- Error Message -->
+            <div
+                class="error"
+                th:if="${error}"
+                th:text="${error}">
+            </div>
+
+            <!-- Loan Application Form -->
+            <form
+                method="post"
+                action="/loans/apply">
+
+                <label for="loanType">
+                    Loan Type
+                </label>
+
+                <select
+                    id="loanType"
+                    name="loanType"
+                    required>
+
+                    <option value="PERSONAL">
+                        Personal — 12%
+                    </option>
+
+                    <option value="HOME">
+                        Home — 7%
+                    </option>
+
+                    <option value="EDUCATION">
+                        Education — 6%
+                    </option>
+
+                    <option value="VEHICLE">
+                        Vehicle — 9%
+                    </option>
+
+                    <option value="BUSINESS">
+                        Business — 11%
+                    </option>
+
+                </select>
+
+                <label for="amount">
+                    Loan Amount
+                </label>
+
+                <input
+                    id="amount"
+                    name="amount"
+                    type="number"
+                    min="1"
+                    step="0.01"
+                    placeholder="Enter loan amount"
+                    required>
+
+                <label for="startDate">
+                    Loan Start Date
+                </label>
+
+                <input
+                    id="startDate"
+                    name="startDate"
+                    type="date"
+                    required>
+
+                <button type="submit">
+                    Apply for Loan
+                </button>
+
+            </form>
+
+            <br>
+
+            <a href="/user/dashboard">
+                Back to Dashboard
+            </a>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>
