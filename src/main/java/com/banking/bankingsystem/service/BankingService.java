@@ -672,4 +672,8 @@ public class BankingService {
 
         return accounts.count();
     }
+    public boolean hasSufficientBalance(
+        double balance, double amount) {
+    return balance >= amount && amount > 0;
+}
 }
