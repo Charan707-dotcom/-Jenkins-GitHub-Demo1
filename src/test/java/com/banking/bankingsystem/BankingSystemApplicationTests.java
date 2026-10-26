@@ -32,4 +32,8 @@ class BankingSystemApplicationTests {
     void shouldRejectZeroWithdrawal() {
         assertFalse(service.hasSufficientBalance(1000, 0));
     }
+    @Test
+void shouldAllowExactBalanceWithdrawal() {
+    assertTrue(service.hasSufficientBalance(1000, 1000));
+}
 }
