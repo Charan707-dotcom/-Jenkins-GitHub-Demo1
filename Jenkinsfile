@@ -72,5 +72,7 @@ if errorlevel 1 exit /b 1
 
 "C:\\Users\\Reliance Digital\\AppData\\Local\\Programs\\DockerDesktop\\resources\\bin\\kubectl.exe" --kubeconfig "C:\\Users\\Reliance Digital\\.kube\\config" get pods
 '''
+            }
+        }
     }
 }
